@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/exhibit'
 require './lib/patron'
 require './lib/museum'
+require 'mocha/minitest'
 
 class MuseumTest < Minitest::Test
 
@@ -97,7 +98,12 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_2)
     @dmns.admit(@patron_3)
 
-    assert_equal "Johnny" || "Bob", @dmns.draw_lottery_winner(@dead_sea_scrolls)
+    @dmns.stubs(:sample).returns("Johnny")
+
+    assert_equal "Johnny", @dmns.draw_lottery_winner(@dead_sea_scrolls)
+    assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
+  end
+    
   end
 
 end
