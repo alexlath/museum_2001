@@ -104,7 +104,7 @@ class MuseumTest < Minitest::Test
     assert_nil @dmns.draw_lottery_winner(@gems_and_minerals)
   end
 
-  def test_it_can_announce_lottery_winner
+  def test_it_can_announce_winning_lottery_winner
     patron_1 = Patron.new("Bob", 0)
     patron_1.add_interest("Dead Sea Scrolls")
     patron_1.add_interest("Gems and Minerals")
@@ -118,7 +118,19 @@ class MuseumTest < Minitest::Test
     @dmns.stubs(:draw_lottery_winner).returns("Bob")
 
     assert_equal "Bob has won the Dead Sea Scrolls exhibit lottery", @dmns.announce_lottery_winner(@dead_sea_scrolls)
-
   end
 
+  def test_it_can_announce_no_winning_lottery_winner
+    patron_1 = Patron.new("Bob", 0)
+    patron_1.add_interest("Dead Sea Scrolls")
+    patron_1.add_interest("Gems and Minerals")
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+    @dmns.admit(patron_1)
+    @dmns.admit(@patron_2)
+    @dmns.admit(@patron_3)
+
+    assert_equal "No winners for this lottery", @dmns.announce_lottery_winner(@gems_and_minerals)
+  end
 end
