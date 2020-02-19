@@ -72,4 +72,15 @@ class MuseumTest < Minitest::Test
     assert_equal patrons_by_exhibit_interest, @dmns.patrons_by_exhibit_interest
   end
 
+  def test_it_can_enter_patrons_into_a_ticket_lottery_contest
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+    @dmns.admit(@patron_1)
+    @dmns.admit(@patron_2)
+    @dmns.admit(@patron_3)
+
+    assert_equal [@patron_1, @patron_3], @dmns.ticket_lottery_contestants(@dead_sea_scrolls)
+  end
+
 end
