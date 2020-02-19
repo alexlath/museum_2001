@@ -13,3 +13,5 @@ class MuseumTest < Minitest::Test
   def test_it_can_exist
     assert_instance_of Museum, @dmns
   end
+
+end
