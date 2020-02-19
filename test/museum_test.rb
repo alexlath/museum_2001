@@ -74,6 +74,8 @@ class MuseumTest < Minitest::Test
 
   def test_it_can_enter_patrons_into_a_ticket_lottery_contest
     patron_1 = Patron.new("Bob", 0)
+    patron_1.add_interest("Dead Sea Scrolls")
+    patron_1.add_interest("Gems and Minerals")
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
