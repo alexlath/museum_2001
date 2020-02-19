@@ -15,4 +15,7 @@ class Museum
     @exhibits.select { |exhibit| patron_param.interests.include?(exhibit.name) }
   end
 
+  def admit(patron_param)
+    @patrons << patron_param
+  end
 end
