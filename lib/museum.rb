@@ -5,4 +5,9 @@ class Museum
     @name = name_param
     @exhibits = []
   end
+
+  def add_exhibit(exhibit_param)
+    @exhibits << exhibit_param
+  end
+  
 end
