@@ -36,10 +36,19 @@ class Museum
   end
 
   def draw_lottery_winner(exhibit_param)
-    if ticket_lottery_contestants(exhibit_param).length != 0 
+    if ticket_lottery_contestants(exhibit_param).length != 0
       ticket_lottery_contestants(exhibit_param).sample.name
     else
       nil
+    end
+  end
+
+  def announce_lottery_winner(exhibit_param)
+    winner = draw_lottery_winner(exhibit_param)
+    if winner != nil
+      "#{winner} has won the #{exhibit_param.name} exhibit lottery"
+    else
+      "No winners for this lottery"
     end
   end
 
